@@ -90,36 +90,21 @@ public partial class KaprekarsConstant
             return false;
         }
 
-        // This is harder. We need to check whether any digit has been
-        // repeated more than once.
-        var numberToWorkOnAsString = numberToWorkOn.ToString();
-        char[] chars = numberToWorkOnAsString.ToCharArray();
-
-        if (CountDigits(chars, 0) > 2)
+        if (HasMoreThanTwoIdenticalDigits(numberToWorkOn))
         {
-            ErrorMessage = "First digit occurs more than twice.";
-            return false;
-        }
-        if (CountDigits(chars, 1) > 2)
-        {
-            ErrorMessage = "Second digit occurs more than twice.";
+            ErrorMessage = "One of the digits occurs more than twice.";
             return false;
         }
 
         return true;
     }
 
-    private int CountDigits(char[] chars, int positionToCheck)
+    private bool HasMoreThanTwoIdenticalDigits(int number)
     {
-        var arrayLength = chars.Length;
-        var digitCount = 0;
-        for (var i = 0; i < arrayLength; i++)
-        {
-            if (chars[i] == chars[positionToCheck])
-            {
-                digitCount++;
-            }
-        }
-        return digitCount;
+        var numberAsString = number.ToString();
+        return numberAsString
+            .GroupBy(x => x)
+            .Any(g =>
+                g.Count() > 2);
     }
 }
