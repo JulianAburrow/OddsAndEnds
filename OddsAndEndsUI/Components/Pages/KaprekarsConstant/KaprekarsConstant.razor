@@ -1,7 +1,28 @@
 ﻿@page "/kaprekarsconstant"
+@rendermode InteractiveServer
 
 <PageTitle>Kaprekar's Constant</PageTitle>
 
 <h3>Kaprekar's Constant</h3>
 
-<p>Working on this one...!</p>
+<p>Enter a value between 1001 and 9999 with no digit repeated more than once.</p>
+
+<span style="color:red">@ErrorMessage</span>
+<br />
+<InputNumber @bind-Value="KaprekarsInput.FourDigitNumber" />
+
+<br /><br />
+
+<button class="btn btn-primary" @onclick="DoCalculations">Check it out</button>
+
+<br />
+<br />
+
+<p style="white-space: pre-line">@KaprekarsInput.ResultsOutput</p>
+
+
+<br />
+
+<p>@KaprekarsInput.IterationCount iteration@(KaprekarsInput.IterationCount != 1 ? "s" : "").</p>
+
+

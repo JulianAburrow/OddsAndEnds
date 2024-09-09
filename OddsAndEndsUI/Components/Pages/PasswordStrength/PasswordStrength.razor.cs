@@ -1,6 +1,4 @@
-﻿using System.Xml.Schema;
-
-namespace OddsAndEndsUI.Components.Pages.PasswordStrength;
+﻿namespace OddsAndEndsUI.Components.Pages.PasswordStrength;
 
 public partial class PasswordStrength
 {
