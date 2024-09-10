@@ -59,30 +59,19 @@ public partial class KaprekarsConstant
 
         while (Difference != KaprekarsConstant)
         {
-            SetLargestAndSmallestValues(LargestNumberAsInt == 0 ? chars : Difference.ToString().ToCharArray());
+            SetLargestAndSmallestValues(LargestNumberAsInt == 0 ? KaprekarsInput.FourDigitNumber : Difference);
+            //SetLargestAndSmallestValues(LargestNumberAsInt == 0 ? chars : Difference.ToString().ToCharArray());
             KaprekarsInput.ResultsOutput += $"{LargestNumberAsInt} - {SmallestNumberAsInt} = {LargestNumberAsInt - SmallestNumberAsInt}\n";
             Difference = LargestNumberAsInt - SmallestNumberAsInt;
             KaprekarsInput.IterationCount += 1;
         }
     }
 
-    private void SetLargestAndSmallestValues(char[] chars)
+    private void SetLargestAndSmallestValues(int number)
     {
-        var smallestNumberArray = chars.OrderBy(x => x).ToArray();
-        var smallestNumberAsString = string.Empty;
-        for (var i = 0; i < smallestNumberArray.Length; i++)
-        {
-            smallestNumberAsString += smallestNumberArray[i];
-        }
-        SmallestNumberAsInt = Convert.ToInt32(smallestNumberAsString);
-
-        var largestNumberArray = chars.OrderByDescending(x => x).ToArray();
-        var largestNumberAsString = string.Empty;
-        for (var i = 0; i < largestNumberArray.Length; i++)
-        {
-            largestNumberAsString += largestNumberArray[i];
-        }
-        LargestNumberAsInt = Convert.ToInt32(largestNumberAsString);
+        var numberAsList = number.ToString().Order();
+        SmallestNumberAsInt = int.Parse(string.Join(",", numberAsList).Replace(",", ""));
+        LargestNumberAsInt = int.Parse(string.Join(",", numberAsList.Reverse()).Replace(",", ""));
     }
 
     private bool ValuesValid()
