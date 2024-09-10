@@ -42,12 +42,19 @@ public partial class KaprekarsConstant
             return;
         }
 
+        const int KaprekarsConstant = 6174;
+
+        if (KaprekarsInput.FourDigitNumber == KaprekarsConstant)
+        {
+            KaprekarsInput.ResultsOutput = "That IS Kaprekar's Constant!";
+            return;
+        }
+
         // So now we have a valid four digit number.
         // The next thing to do is to arrange the digits
         // to create the largest and smallest possible
         // numbers out of them.
 
-        const int KaprekarsConstant = 6174;
         var chars = KaprekarsInput.FourDigitNumber.ToString().ToCharArray();
 
         while (Difference != KaprekarsConstant)
@@ -82,7 +89,6 @@ public partial class KaprekarsConstant
     {
         var numberToWorkOn = KaprekarsInput.FourDigitNumber;
 
-        // Easy one first...
         if (numberToWorkOn < 1001 ||
             numberToWorkOn > 9999)
         {
