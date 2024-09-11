@@ -60,7 +60,6 @@ public partial class KaprekarsConstant
         while (Difference != KaprekarsConstant)
         {
             SetLargestAndSmallestValues(LargestNumberAsInt == 0 ? KaprekarsInput.FourDigitNumber : Difference);
-            //SetLargestAndSmallestValues(LargestNumberAsInt == 0 ? chars : Difference.ToString().ToCharArray());
             KaprekarsInput.ResultsOutput += $"{LargestNumberAsInt} - {SmallestNumberAsInt} = {LargestNumberAsInt - SmallestNumberAsInt}\n";
             Difference = LargestNumberAsInt - SmallestNumberAsInt;
             KaprekarsInput.IterationCount += 1;
