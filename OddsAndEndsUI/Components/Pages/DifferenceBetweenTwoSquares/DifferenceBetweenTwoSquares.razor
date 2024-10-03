@@ -1,0 +1,31 @@
+﻿@page "/differencebetweentwosquares"
+@rendermode InteractiveServer
+
+<PageTitle>Difference Between Two Squares</PageTitle>
+
+<h3>Difference Between Two Squares</h3>
+
+<label>First number</label>
+
+<InputSelect @bind-Value="CurrentValues.FirstNumber" @bind-Value:after="CalculateDifference">
+    @for (var i = 1; i <= 20; i++)
+    {
+        <option value="@i">@i</option>
+    }
+</InputSelect>
+
+<label>Second number</label>
+
+<InputSelect @bind-Value="CurrentValues.SecondNumber" @bind-Value:after="CalculateDifference">
+    @for (var i = 1; i <= 20; i++)
+    {
+        <option value="@i">@i</option>
+    }
+</InputSelect>
+
+<br />
+<br />
+
+<p>The difference between the square of <span style="font-weight: bold">@CurrentValues.FirstNumber</span>
+    and the square of <span style="font-weight: bold">@CurrentValues.SecondNumber</span>
+    is <span style="font-weight: bold">@CurrentValues.Result</span>.</p>

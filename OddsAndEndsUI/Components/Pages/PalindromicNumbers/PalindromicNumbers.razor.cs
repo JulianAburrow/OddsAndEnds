@@ -7,7 +7,7 @@ public partial class PalindromicNumbers
     protected override void OnInitialized()
     {
         var previousNumber = 0;
-        for (var i = 10; i <= 10000; i++)
+        for (var i = 10; i <= 1000; i++)
         {
             var numberAsString = i.ToString();
             var reversedNumberString = ReverseString(numberAsString);
