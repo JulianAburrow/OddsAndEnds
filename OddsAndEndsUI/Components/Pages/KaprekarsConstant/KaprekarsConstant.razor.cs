@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace OddsAndEndsUI.Components.Pages.KaprekarsConstant;
 
@@ -8,7 +7,7 @@ public partial class KaprekarsConstant
     public class KaprekarsValues
     {
         [Required(ErrorMessage = "{0} is required")]
-        [Range(1001, 9999, ErrorMessage = "{0} must be between {1} and {2}")]
+        [Range(1001, 9998, ErrorMessage = "{0} must be between {1} and {2}")]
         [Length(4, 4)]
         [Display(Name = "Four Digit Number")]
         public int FourDigitNumber { get; set; }
@@ -55,8 +54,6 @@ public partial class KaprekarsConstant
         // to create the largest and smallest possible
         // numbers out of them.
 
-        var chars = KaprekarsInput.FourDigitNumber.ToString().ToCharArray();
-
         while (Difference != KaprekarsConstant)
         {
             SetLargestAndSmallestValues(LargestNumberAsInt == 0 ? KaprekarsInput.FourDigitNumber : Difference);
@@ -68,9 +65,11 @@ public partial class KaprekarsConstant
 
     private void SetLargestAndSmallestValues(int number)
     {
-        var numberAsList = number.ToString().Order();
-        SmallestNumberAsInt = int.Parse(string.Join(",", numberAsList).Replace(",", ""));
-        LargestNumberAsInt = int.Parse(string.Join(",", numberAsList.Reverse()).Replace(",", ""));
+        var padded = number.ToString("D4"); // ensures 4 digits
+        var digits = padded.Order().ToArray();
+
+        SmallestNumberAsInt = int.Parse(new string(digits));
+        LargestNumberAsInt = int.Parse(new string(digits.Reverse().ToArray()));
     }
 
     private bool ValuesValid()
@@ -78,27 +77,27 @@ public partial class KaprekarsConstant
         var numberToWorkOn = KaprekarsInput.FourDigitNumber;
 
         if (numberToWorkOn < 1001 ||
-            numberToWorkOn > 9999)
+            numberToWorkOn > 9998)
         {
-            ErrorMessage = "Must be a number between 1001 and 9999";
+            ErrorMessage = "Must be a number greater than 1000 and less than 9999";
             return false;
         }
 
-        if (HasMoreThanTwoIdenticalDigits(numberToWorkOn))
+        if (AllDigitsIdentical(numberToWorkOn))
         {
-            ErrorMessage = "One of the digits occurs more than twice.";
+            ErrorMessage = "All digits cannot be identical.";
             return false;
         }
 
         return true;
     }
 
-    private bool HasMoreThanTwoIdenticalDigits(int number)
+    private bool AllDigitsIdentical(int number)
     {
         var numberAsString = number.ToString();
         return numberAsString
             .GroupBy(x => x)
             .Any(g =>
-                g.Count() > 2);
+                g.Count() > 3);
     }
 }
